@@ -212,7 +212,7 @@ namespace :drupal do
           execute :chmod, '-R', '555', '.'
 
           # Remove execution for files, keep execution on folder.
-          execute 'find', './ -type f -executable -exec chmod -x {} \;'
+          execute 'find', './ -type f -perm +111 -exec chmod -x {} \;'
           execute 'find', './ -type d -exec chmod +x {} \;'
         end
       end
@@ -251,7 +251,7 @@ namespace :drupal do
           execute :chmod, '-R', '775', "#{fetch(:app_path)}/sites/default/files"
 
           # Remove execution for files, keep execution on folder.
-          execute 'find', "#{fetch(:app_path)}/sites/default/files", '-type f -executable -exec chmod -x {} \;'
+          execute 'find', "#{fetch(:app_path)}/sites/default/files", '-type f -perm +111 -exec chmod -x {} \;'
           execute 'find', "#{fetch(:app_path)}/sites/default/files", '-type d -exec chmod +sx {} \;'
         end
       end
